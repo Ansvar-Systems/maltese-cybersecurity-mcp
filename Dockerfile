@@ -13,7 +13,6 @@ ENV CSIMALTA_DB_PATH=/app/data/csi-malta.db
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
 COPY --from=builder /app/dist/ dist/
-COPY data/csi-malta.db data/csi-malta.db
 RUN addgroup --system --gid 1001 mcp && \
     adduser --system --uid 1001 --ingroup mcp mcp && \
     chown -R mcp:mcp /app
