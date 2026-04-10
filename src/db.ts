@@ -261,3 +261,31 @@ export function listFrameworks(): Framework[] {
     .prepare("SELECT * FROM frameworks ORDER BY id")
     .all() as Framework[];
 }
+
+// --- Meta queries -------------------------------------------------------------
+
+/**
+ * Returns the most recent date found in either the guidance or advisories
+ * tables, or null if the database is empty or the DB file does not yet exist.
+ */
+export function getLatestDataDate(): string | null {
+  try {
+    const db = getDb();
+    const g = (
+      db.prepare("SELECT MAX(date) AS d FROM guidance").get() as {
+        d: string | null;
+      }
+    )?.d;
+    const a = (
+      db.prepare("SELECT MAX(date) AS d FROM advisories").get() as {
+        d: string | null;
+      }
+    )?.d;
+    if (!g && !a) return null;
+    if (!g) return a;
+    if (!a) return g;
+    return g > a ? g : a;
+  } catch {
+    return null;
+  }
+}
