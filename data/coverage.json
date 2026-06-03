@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "mcp": "maltese-cybersecurity-mcp",
+  "sources": [
+    {
+      "name": "CSI Malta",
+      "url": "https://csimalta.gov.mt/",
+      "types": ["guidance", "advisories"]
+    },
+    {
+      "name": "MITA",
+      "url": "https://mita.gov.mt/",
+      "types": ["guidance"]
+    }
+  ],
+  "series": ["NIS2", "MITA-standard", "national-strategy"],
+  "document_types": ["directive", "guideline", "standard", "recommendation"],
+  "advisory_severities": ["critical", "high", "medium", "low"],
+  "frameworks": [
+    { "id": "nis2-mt", "name": "Malta NIS2 Implementation Framework" },
+    { "id": "national-cyber-strategy-mt", "name": "Malta National Cybersecurity Strategy" },
+    { "id": "mita-standards", "name": "MITA Technical Standards Series" }
+  ],
+  "ingest_schedule": "monthly (1st of month, 04:00 UTC)",
+  "freshness_check_schedule": "weekly (Monday, 08:00 UTC)",
+  "notes": "Full-text search backed by FTS5. Coverage may be incomplete for documents published only in Maltese or before 2020."
+}
